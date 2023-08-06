@@ -1,2 +1,2 @@
 # edwardash
-a 30+6 key version of omkb's ergodash
+a 30+12 key version of omkb's ergodash
