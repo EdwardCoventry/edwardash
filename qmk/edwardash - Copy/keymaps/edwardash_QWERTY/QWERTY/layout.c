@@ -1,53 +1,18 @@
-//
-#include "layers.c"
-#include "functions.c"
-// gtp generated
-#include "keycodes/pycharmkeycodes.h"
-// more keycodes
-#include "keycodes/otherkeycodes.h"
+// 
+#include "keydefs.c"
 
-
-
-
-// [_ABC] = LAYOUT(
-//         KC_Q,                   LT(BREAKPOINTS,KC_W),   LT(STEPPING,KC_H),      LT(DEBUGGING,KC_F),     KC_V,                   KC_K,                   KC_M,                   KC_D,                   KC_U,                   KC_Z,
-//         LT(DELETE,KC_A),        LT(TABS,KC_R),          LT(LEFT_RIGHT_NAVIGATION,KC_S),LT(SYMBOLS,KC_T),KC_X,                   KC_J,                   LT(TOOLS,KC_N),         LT(COPILOT,KC_E),     KC_I,                   LT(DEBUGGING_LAYER_SELECT, KC_O),
-//         LT(NUMS,KC_G),          LT(MEDIA,KC_P),         LT(COPILOT, KC_C),      LT(SYMBOLS_2,KC_L),                   KC_NO,                   KC_NO,                   LT(BOOKMARKS, KC_DOT),    KC_COMM,                LT(MEDIA,KC_B),       KC_Y,
-//     XXXXXXX,                KC_LALT,                LT(WINDOWS,KC_DEL),     XXXXXXX,
-//     XXXXXXX,                KC_LGUI,                ENTER_SHIFT,            CTRL_ESCAPE,            LT(DELETE,KC_BSPC),     KC_SPC,XXXXXXX,KC_GRV
-//     ),
 
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_QWERTY] = LAYOUT(
-        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-        KC_A,    KC_S,     KC_D,    KC_F,    KC_G,                   KC_H,    KC_J,    KC_K,    KC_L,    KC_DOT,
-        KC_Z,    KC_X,     KC_C,    KC_V,    KC_B,                   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_QUOT,
-                                              XXXXXXX, KC_LALT, KC_DEL,  XXXXXXX,
-                XXXXXXX, KC_LGUI,  KC_ENT,  KC_ESC, KC_BSPC, KC_SPC, XXXXXXX, XXXXXXX
-        ),
-
-
-
-[_ABC] = LAYOUT(
-  HK_Q,    HK_W,    HK_H,    HK_F,    HK_V,    HK_K,    HK_M,    HK_D,    HK_U,    HK_Z,
-  HK_A,    HK_R,    HK_S,    HK_T,    HK_X,    HK_J,    HK_N,    HK_E,    HK_I,    HK_O,
-        HK_G,    HK_P,    HK_C,    HK_L,    KC_NO,   KC_NO,   HK_DOT,  HK_COMMA, HK_B,    HK_Y,
-        XXXXXXX, KC_LALT, KC_DEL,  XXXXXXX,
-        XXXXXXX, KC_LGUI, ENTER_SHIFT, CTRL_ESCAPE, KC_BSPC, KC_SPC,  XXXXXXX, XXXXXXX
-        ),
-
-
-
- [_HOLD] = LAYOUT(
-  _______, MO(BREAKPOINTS), MO(STEPPING), MO(DEBUGGING), _______, _______, _______, _______, _______, _______,
-  MO(DELETE), MO(TABS), MO(LEFT_RIGHT_NAVIGATION), MO(SYMBOLS), _______, _______, MO(TOOLS), MO(COPILOT), _______, MO(DEBUGGING_LAYER_SELECT),
-  MO(NUMS), MO(MEDIA), MO(COPILOT), MO(SYMBOLS_2), _______, _______, MO(BOOKMARKS), _______, MO(MEDIA), _______,
-                                          _______, _______, MO(WINDOWS), _______,
-  _______, _______, _______, _______, MO(DELETE), _______, _______, _______
-        ),
+        KC_Q,                   LT(BREAKPOINTS,KC_W),   LT(STEPPING,KC_E),      LT(DEBUGGING,KC_R),     KC_T,                   KC_Y,                   KC_U,                   KC_I,                   KC_O,                   KC_P,
+        LT(DELETE,KC_A),        LT(TABS,KC_S),          LT(LEFT_RIGHT_NAVIGATION,KC_D),LT(SYMBOLS,KC_F),KC_G,                   KC_H,                   LT(TOOLS,KC_J),         LT(COPILOT,KC_K),     KC_L,                   LT(DEBUGGING_LAYER_SELECT, KC_DOT),
+        LT(NUMS,KC_Z),          LT(MEDIA,KC_X),         LT(COPILOT, KC_C),      LT(SYMBOLS_2,KC_V),                   KC_B,                   KC_N,                   LT(BOOKMARKS, KC_M),    KC_COMM,                LT(MEDIA,KC_DOT),       KC_QUOT,
+                                                                                XXXXXXX,                KC_LALT,                LT(WINDOWS,KC_DEL),     XXXXXXX,
+                                XXXXXXX,                KC_LGUI,                ENTER_SHIFT,            CTRL_ESCAPE,            LT(DELETE,KC_BSPC),     KC_SPC,XXXXXXX,KC_GRV
+),
 
 
 
@@ -55,8 +20,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYMBOLS] = LAYOUT(
         KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_PPLS,                KC_PAST,                KC_EQL,                 KC_MINS,                KC_PSLS,
-        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_9),                KC_LBRC,                S(KC_LBRC),             KC_F23,
-        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),          KC_F24,                 KC_COLON,                KC_SEMICOLON,                S(KC_RBRC),             KC_QUOTE,
+        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_9),                KC_LBRC,                S(KC_LBRC),             S(KC_DOT),
+        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),          KC_F24,                 S(KC_0),                KC_RBRC,                S(KC_RBRC),             S(KC_2),
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
                                 XXXXXXX,                KC_TRNS,                 S(KC_ENT),                 XXXXXXX,  KC_TRNS,                LT(MOD_LEFT_RIGHT_NAVIGATION,KC_NO),KC_F22,     XXXXXXX
 ),
@@ -78,9 +43,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 [_SYMBOLS_2] = LAYOUT(
-        KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_AMPR,                KC_CIRC,                KC_PIPE,                 KC_TILDE,                KC_NUBS,
-        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_0),                KC_RBRC,                S(KC_RBRC),             KC_F24,
-        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),             KC_F24,                 KC_EXCLAIM,                KC_QUESTION,               XXXXXXX,             KC_DOUBLE_QUOTE,
+        KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_PIPE,                KC_CIRC,                KC_EQL,                 KC_MINS,                KC_NUBS,
+        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_9),                KC_LBRC,                S(KC_LBRC),             S(KC_DOT),
+        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),             KC_F24,                 S(KC_0),                KC_RBRC,                S(KC_RBRC),             S(KC_2),
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
                                 XXXXXXX,                KC_TRNS,                KC_F22,                 LT(SHORTCUTS, KC_F22),  KC_TRNS,                LT(MOD_LEFT_RIGHT_NAVIGATION,KC_NO),KC_F22,     XXXXXXX
         ),
@@ -388,7 +353,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-
+    
 
 
 

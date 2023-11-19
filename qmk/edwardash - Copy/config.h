@@ -1,6 +1,4 @@
 /*
-This is the c configuration file for the keymap
-
 Copyright 2012 Jun Wako <wakojun@gmail.com>
 Copyright 2015 Jack Humbert
 
@@ -20,19 +18,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+/* define tapping term */
+#define TAPPING_TERM 120
 
-/* Use I2C or Serial, not both */
-#define USE_SERIAL
-// #define USE_I2C
+/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
+#define LOCKING_SUPPORT_ENABLE
+/* Locking resynchronize hack */
+#define LOCKING_RESYNC_ENABLE
 
-/* Select hand configuration */
-#define MASTER_RIGHT
 
-#undef TAPPING_TERM
-#define TAPPING_TERM 180 
-
-#define MAX_LAYER 32
-#define LAYER_STATE_32BIT 
-
-#define HOLD_ON_OTHER_KEY_PRESS
-
+#define SELECT_SOFT_SERIAL_SPEED 1
+/*Sets the protocol speed when using serial communication*/
+//Speeds:
+//0: about 189kbps (Experimental only)
+//1: about 137kbps (default)
+//2: about 75kbps
+//3: about 39kbps
+//4: about 26kbps
+//5: about 20kbps

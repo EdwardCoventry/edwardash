@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "edwardash-rescue")(type "Legacy")(uri "${KIPRJMOD}/edwardash-rescue.lib")(options "")(descr ""))
+)

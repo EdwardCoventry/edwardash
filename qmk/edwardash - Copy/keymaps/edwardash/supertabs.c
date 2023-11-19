@@ -27,7 +27,7 @@ void release_ctl_tab(void) {
     }
 }
 
-layer_state_t layer_state_set_user(layer_state_t state) {
+layer_state_t release_on_layer_change(layer_state_t state) {
     release_alt_tab(false);
     release_ctl_tab();
     return state;
