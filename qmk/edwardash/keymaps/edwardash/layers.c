@@ -20,7 +20,6 @@ enum layer_names {
   _MEDIA,
 
   _QWERTY,
-  _HOLD,
 
   _MOD_LEFT_RIGHT_NAVIGATION,
   _MOD_UP_DOWN_NAVIGATION,
@@ -60,7 +59,6 @@ enum custom_keycodes {
   MEDIA,
 
   QWERTY,
-  HOLD,
 
   MOD_LEFT_RIGHT_NAVIGATION,
   MOD_UP_DOWN_NAVIGATION,
@@ -99,7 +97,6 @@ enum custom_keycodes {
   CAPS_ALT,
   WIN_SPACE,
   
-  HK_Q, HK_W, HK_H, HK_F, HK_V, HK_K, HK_M, HK_D, HK_U, HK_Z, HK_A, HK_R, HK_S, HK_T, HK_X, HK_J, HK_N, HK_E, HK_I, HK_O, HK_G, HK_P, HK_C, HK_L, HK_DOT, HK_COMMA, HK_B, HK_Y,
 
 
 

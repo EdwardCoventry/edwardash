@@ -10,7 +10,7 @@
 
 #include "features/shifts.h"
 
-
+//  https://github.com/qmk/qmk_firmware/blob/master/docs/understanding_qmk.md
 
 void persistent_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
@@ -29,9 +29,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       shift_tab_other_key_pressed = true;
     }
   }
-  
-  
-  
+
   
   
   if (!handle_shift_keycombos(keycode, record)) return false;
