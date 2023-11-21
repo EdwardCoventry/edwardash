@@ -20,7 +20,7 @@
  * <https://getreuer.info/posts/keyboards/layer-lock>
  */
 
-#include "layer_lock.h"
+#include "layerlock.h"
 
 // The current lock state. The kth bit is on if layer k is locked.
 static layer_state_t locked_layers = 0;
@@ -49,7 +49,7 @@ static bool handle_mo_or_tt(uint8_t layer, keyrecord_t* record) {
   return true;
 }
 
-bool process_layer_lock(uint16_t keycode, keyrecord_t* record,
+bool handle_layer_lock(uint16_t keycode, keyrecord_t* record,
                         uint16_t lock_keycode) {
 #if LAYER_LOCK_IDLE_TIMEOUT > 0
   layer_lock_timer = timer_read32();
@@ -88,7 +88,7 @@ bool process_layer_lock(uint16_t keycode, keyrecord_t* record,
       }
     } break;
 
-#ifndef NO_ACTION_TAPPING
+#ifndef _____TAPPING
     case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:  // `LT(layer, key)` keys.
       if (record->tap.count == 0 && !record->event.pressed &&
           is_layer_locked(QK_LAYER_TAP_GET_LAYER(keycode))) {
@@ -96,7 +96,7 @@ bool process_layer_lock(uint16_t keycode, keyrecord_t* record,
         return false;  // Skip default handling so that layer stays on.
       }
       break;
-#endif  // NO_ACTION_TAPPING
+#endif  // _____TAPPING
   }
 
   return true;
@@ -109,11 +109,11 @@ bool is_layer_locked(uint8_t layer) {
 void layer_lock_invert(uint8_t layer) {
   const layer_state_t mask = (layer_state_t)1 << layer;
   if ((locked_layers & mask) == 0) {  // Layer is being locked.
-#ifndef NO_ACTION_ONESHOT
+#ifndef _____ONESHOT
     if (layer == get_oneshot_layer()) {
       reset_oneshot_layer();  // Reset so that OSL doesn't turn layer off.
     }
-#endif  // NO_ACTION_ONESHOT
+#endif  // _____ONESHOT
     layer_on(layer);
 #if LAYER_LOCK_IDLE_TIMEOUT > 0
     layer_lock_timer = timer_read32();

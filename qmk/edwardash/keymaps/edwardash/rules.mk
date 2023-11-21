@@ -4,4 +4,4 @@ CONSOLE_ENABLE = yes
 COMMAND_ENABLE = no
 LTO_ENABLE = no
 
-SRC += features/layer_lock.c
+SRC += features/layerlock/layerlock.c

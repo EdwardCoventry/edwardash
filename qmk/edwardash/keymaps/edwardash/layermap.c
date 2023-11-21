@@ -1,21 +1,39 @@
 
-//
+#pragma once
 #include "layers.c"
 // gtp generated
 #include "keycodes/pycharmkeycodes.h"
 // more keycodes
 #include "keycodes/otherkeycodes.h"
 
-#define NO_ACTION 0 // or whatever value you assign for no action
+#define ____ 0 // or whatever value you assign for no action
 
-const int hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_ABC] = LAYOUT(        // Assuming NO_ACTION is defined as -1 or any other int value representing no action
-        NO_ACTION, _BREAKPOINTS, _STEPPING, _DEBUGGING, NO_ACTION, NO_ACTION, NO_ACTION, NO_ACTION, NO_ACTION, NO_ACTION,
-        _DELETE, _TABS, _LEFT_RIGHT_NAVIGATION, _SYMBOLS, NO_ACTION, NO_ACTION, _TOOLS, _COPILOT, NO_ACTION, _DEBUGGING_LAYER_SELECT,
-        _NUMS, _MEDIA, _COPILOT, _SYMBOLS_2, NO_ACTION, NO_ACTION, _BOOKMARKS, NO_ACTION, _MEDIA, NO_ACTION,
-        NO_ACTION, NO_ACTION, _WINDOWS, NO_ACTION,
-        NO_ACTION, NO_ACTION, NO_ACTION, NO_ACTION, _DELETE, NO_ACTION, NO_ACTION, NO_ACTION),
+
+
+// List of layers that are actually defined in hold_layers
+const uint8_t defined_hold_layers[] = {_ABC, _LEFT_RIGHT_NAVIGATION};
+
+const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
+    [_ABC] = LAYOUT(        // Assuming ____ is defined as -1 or any other int value representing no action
+        ____, _BREAKPOINTS, _STEPPING, _DEBUGGING, ____, ____, ____, ____, ____, ____,
+        _DELETE, _TABS, _LEFT_RIGHT_NAVIGATION, _SYMBOLS, ____, ____, _TOOLS, _COPILOT, ____, _DEBUGGING_LAYER_SELECT,
+        _NUMS, _MEDIA, _COPILOT, _SYMBOLS_2, ____, ____, _BOOKMARKS, ____, _MEDIA, ____,
+        ____, ALT, _WINDOWS, ____,
+        ____, WIN, SHIFT, CTRL, _DELETE, ____, ____, ____),
     // Define other layers as needed
+
+
+
+[_LEFT_RIGHT_NAVIGATION] = LAYOUT(
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                _UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                ____,                ____,
+                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+),
+
+
+
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -33,9 +51,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ABC] = LAYOUT(
   KC_Q,    KC_W,    KC_H,    KC_F,    KC_V,    KC_K,    KC_M,    KC_D,    KC_U,    KC_Z,
   KC_A,    KC_R,    KC_S,    KC_T,    KC_X,    KC_J,    KC_N,    KC_E,    KC_I,    KC_O,
-        KC_G,    KC_P,    KC_C,    KC_L,    KC_NO,   KC_NO,   KC_DOT,  KC_COMMA, KC_B,    KC_Y,
+        KC_G,    KC_B,    KC_C,    KC_L,    KC_NO,   KC_NO,   KC_DOT,  KC_COMMA, KC_P,    KC_Y,
         XXXXXXX, KC_LALT, KC_DEL,  XXXXXXX,
-        KC_LSFT, KC_LGUI,  KC_ENT,  KC_LCTL, KC_BSPC, KC_SPC, XXXXXXX, XXXXXXX
+        XXXXXXX, XXXXXXX,  KC_ENT,  KC_ESC, KC_BSPC, KC_SPC, XXXXXXX, XXXXXXX
         ),
 
 

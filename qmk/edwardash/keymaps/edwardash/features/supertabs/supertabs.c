@@ -1,10 +1,6 @@
 bool is_alt_tab_active = false;
 bool is_ctl_tab_active = false;
 
-bool get_shift_is_pressed(void) {
-  return get_mods() & MOD_BIT(KC_LSFT);
-}
-
 void release_alt_tab(bool escape) {
     if (is_alt_tab_active) {
         //  send escape to exit alt tab menu at the point we're on, rather than release to go to the next
@@ -49,7 +45,7 @@ void do_stab(keyrecord_t *record) {
 
 void do_alt_tab(keyrecord_t *record) {
     release_ctl_tab();
-    
+
     if (record->event.pressed) {
         if (!is_alt_tab_active) {
             is_alt_tab_active = true;
@@ -125,4 +121,72 @@ void do_desktop_right(keyrecord_t *record) {
 
         tap_code16(C(G(KC_RIGHT)));
     }
+}
+
+
+bool handle_super_tabs(uint16_t keycode, keyrecord_t *record) {
+
+    // switch logic here
+    switch (keycode) {
+
+        case TAB_RIGHT:
+            if (get_mods() & MOD_BIT(KC_LCTL)) {
+                do_ctrl_tab(record);
+            } else if (get_mods() & MOD_BIT(KC_LSFT)) {
+                //  unregister shift
+                unregister_code(KC_LSFT);
+                //  now do as if shift was not held
+                do_alt_tab(record);
+                //  register shift again
+                register_code(KC_LSFT);
+            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
+                do_desktop_right(record);
+            } else {
+                do_tab(record);
+            }
+            break;
+
+        case TAB_LEFT:
+            if (get_mods() & MOD_BIT(KC_LCTL)) {
+                do_sctrl_tab(record);
+            } else if (get_mods() & MOD_BIT(KC_LSFT)) {
+                do_salt_tab(record);
+            } else if (get_mods() & MOD_BIT(KC_LGUI)) {
+                do_desktop_left(record);
+            } else {
+                do_stab(record);
+            }
+            break;
+
+        case DESKTOP_LEFT:
+            do_desktop_left(record);
+            break;
+
+        case DESKTOP_RIGHT:
+            do_desktop_right(record);
+            break;
+
+        case ALT_TAB:
+            do_alt_tab(record);
+            break;
+
+        case SALT_TAB:
+            do_salt_tab(record);
+            break;
+
+        case CTL_TAB:
+            do_ctrl_tab(record);
+            break;
+
+        case SCTL_TAB:
+            do_sctrl_tab(record);
+            break;
+
+
+            return false;
+
+    }
+
+
+    return true;
 }

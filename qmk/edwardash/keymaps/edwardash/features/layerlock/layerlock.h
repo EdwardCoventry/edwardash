@@ -84,7 +84,7 @@ extern "C" {
  *       return true;
  *     }
  */
-bool process_layer_lock(uint16_t keycode, keyrecord_t* record,
+bool handle_layer_lock(uint16_t keycode, keyrecord_t* record,
                         uint16_t lock_keycode);
 
 /** Returns true if `layer` is currently locked. */

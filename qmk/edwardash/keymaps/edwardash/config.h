@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #undef TAPPING_TERM
 //#define TAPPING_TERM 180
-#define TAPPING_TERM 1000
+#define TAPPING_TERM 180
 
 #define MAX_LAYER 32
 #define LAYER_STATE_32BIT 

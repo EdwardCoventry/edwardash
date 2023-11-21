@@ -10,3 +10,18 @@ void keyboard_post_init_user(void) {
   debug_matrix=true;   // Enable matrix debug messages
   // Other debug options are available. Check QMK's documentation for more info.
 }
+
+
+void print_free_memory(void) {
+    extern int __heap_start, *__brkval;
+    int v;
+    int free_memory;
+
+    if ((int)__brkval == 0) {
+        free_memory = ((int)&v) - ((int)&__heap_start);
+    } else {
+        free_memory = ((int)&v) - ((int)__brkval);
+    }
+
+    uprintf("Free RAM: %d bytes\n", free_memory);
+}
