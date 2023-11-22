@@ -6,22 +6,31 @@
 // more keycodes
 #include "keycodes/otherkeycodes.h"
 
+
+#define NO_LAYER 0 // or whatever value you assign for no action
 #define ____ 0 // or whatever value you assign for no action
 
 
 
 // List of layers that are actually defined in hold_layers
-const uint8_t defined_hold_layers[] = {_ABC, _LEFT_RIGHT_NAVIGATION};
+const uint8_t defined_hold_layers[] = {_ABC, _SYMBOLS, _LEFT_RIGHT_NAVIGATION, _TABS};
 
 const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ABC] = LAYOUT(        // Assuming ____ is defined as -1 or any other int value representing no action
         ____, _BREAKPOINTS, _STEPPING, _DEBUGGING, ____, ____, ____, ____, ____, ____,
         _DELETE, _TABS, _LEFT_RIGHT_NAVIGATION, _SYMBOLS, ____, ____, _TOOLS, _COPILOT, ____, _DEBUGGING_LAYER_SELECT,
         _NUMS, _MEDIA, _COPILOT, _SYMBOLS_2, ____, ____, _BOOKMARKS, ____, _MEDIA, ____,
-        ____, ALT, _WINDOWS, ____,
-        ____, WIN, SHIFT, CTRL, _DELETE, ____, ____, ____),
+        ____, ALT, ____, ____,
+        ____, WIN, SHIFT, CTRL, ____, ____, ____, ____),
     // Define other layers as needed
 
+    [_SYMBOLS] = LAYOUT(
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                _LEFT_RIGHT_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                ____,                ____,
+                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+),
 
 
 [_LEFT_RIGHT_NAVIGATION] = LAYOUT(
@@ -29,23 +38,34 @@ const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,                ____,                ____,                _UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
                                                                                 ____,                ____,                ____,                ____,
-                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+                                ____,                ____,                _MOD_UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____
 ),
+
+
+
+        [_TABS] = LAYOUT(
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                ____,                ____,
+                                                                                ____,                WIN,                SHIFT,                CTRL,                ____,                ____,                ____,                ____
+),
+
+
+//        [_EMPTY] = LAYOUT(
+//        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+//        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+//        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+//                                                                                ____,                ____,                ____,                ____,
+//                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+//)
+//
 
 
 
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-[_QWERTY] = LAYOUT(
-        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                   KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-        KC_A,    KC_S,     KC_D,    KC_F,    KC_G,                   KC_H,    KC_J,    KC_K,    KC_L,    KC_DOT,
-        KC_Z,    KC_X,     KC_C,    KC_V,    KC_B,                   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_QUOT,
-                                              XXXXXXX, KC_LALT, KC_DEL,  XXXXXXX,
-                XXXXXXX, KC_LGUI,  KC_ENT,  KC_ESC, KC_BSPC, KC_SPC, XXXXXXX, XXXXXXX
-        ),
-
 
 
 [_ABC] = LAYOUT(
@@ -62,22 +82,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYMBOLS] = LAYOUT(
         KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_PPLS,                KC_PAST,                KC_EQL,                 KC_MINS,                KC_PSLS,
-        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_9),                KC_LBRC,                S(KC_LBRC),             KC_F23,
-        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),          KC_F24,                 KC_COLON,                KC_SEMICOLON,                S(KC_RBRC),             KC_QUOTE,
+        S(KC_1),                KC_NUHS,       KC_EQL,      XXXXXXX,  KC_NUHS,           KC_F23,                 KC_LEFT_PAREN,                KC_LBRC,                S(KC_LBRC),             KC_LEFT_CURLY_BRACE,
+        LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),          KC_F24,                 KC_COLON,                KC_SEMICOLON,                XXXXXXX,             KC_QUOTE,
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
-                                XXXXXXX,                KC_TRNS,                 S(KC_ENT),                 XXXXXXX,  KC_TRNS,                LT(MOD_LEFT_RIGHT_NAVIGATION,KC_NO),KC_F22,     XXXXXXX
-),
-
-
-
-
-
-[_MOD] = LAYOUT(
-        _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,
-        _______,                MO(TABS),               TAB_LEFT,               TAB_RIGHT,              _______,                _______,                _______,                _______,                _______,                _______,
-        _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______,
-                                                                                _______,                _______,                _______,                _______,
-                                _______,                _______,                _______,                _______,                _______,                _______,                _______,                _______
+                                XXXXXXX,                KC_TRNS,                 S(KC_ENT),                 XXXXXXX,  KC_TRNS,                KC_UNDERSCORE,KC_F22,     XXXXXXX
 ),
 
 
@@ -86,14 +94,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYMBOLS_2] = LAYOUT(
         KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_AMPR,                KC_CIRC,                KC_PIPE,                 KC_TILDE,                KC_NUBS,
-        S(KC_1),                LT(TABS,KC_NUHS),       LT(UP_DOWN_NAVIGATION,KC_EQL),MO(UP_DOWN_NAVIGATION),KC_NUHS,           KC_F23,                 S(KC_0),                KC_RBRC,                S(KC_RBRC),             KC_F24,
+        S(KC_1),                LT(TABS,KC_NUHS),       KC_EQL,KC_EQL,KC_NUHS,           KC_F23,                 KC_RIGHT_PAREN,                KC_RBRC,                S(KC_RBRC),             KC_RIGHT_CURLY_BRACE,
         LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),             KC_F24,                 KC_EXCLAIM,                KC_QUESTION,               XXXXXXX,             KC_DOUBLE_QUOTE,
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
-                                XXXXXXX,                KC_TRNS,                KC_F22,                 LT(SHORTCUTS, KC_F22),  KC_TRNS,                LT(MOD_LEFT_RIGHT_NAVIGATION,KC_NO),KC_F22,     XXXXXXX
+                                XXXXXXX,                KC_TRNS,                KC_F22,                 KC_F22,  KC_TRNS,                XXXXXXX,KC_F22,     XXXXXXX
         ),
 
 
 
+[_TABS] = LAYOUT(
+        A(KC_F18),              A(KC_F19),              A(KC_F20),              A(KC_F21),              A(KC_F22),              XXXXXXX,                XXXXXXX,                G(KC_TAB),              ALT_TAB_LEFT,               ALT_TAB_RIGHT,
+        KC_ENT,                 XXXXXXX,                TAB_LEFT,               TAB_RIGHT,              XXXXXXX,                XXXXXXX,                TAB_LEFT,               TAB_RIGHT,              XXXXXXX,                KC_ENT,
+        KC_ESC,                 A(KC_F17),              A(KC_F14),              A(KC_F13),              A(KC_F16),              XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                KC_ESC,
+                                                                                _______,                LLOCK,
+        XXXXXXX,                XXXXXXX,
+                                XXXXXXX,                G(KC_TAB),                C(A(KC_TAB)),                KC_ESC,                _______,                _______,                _______,                _______
+),
 
 
 
@@ -109,36 +125,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-[_WINDOWS] = LAYOUT(
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                G(KC_TAB),              C(G(KC_LEFT)),          C(G(KC_RGHT)),          XXXXXXX,
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                G(KC_LEFT),             G(KC_RIGHT),            XXXXXXX,                XXXXXXX,
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                G(KC_UP),               G(KC_DOWN),             XXXXXXX,
-                                                                                XXXXXXX,                MO(WINDOWS_NAVIGATION), XXXXXXX,                XXXXXXX,
-                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                MO(WINDOWS_NAVIGATION), XXXXXXX,                XXXXXXX,                XXXXXXX
-),
-
-
-
-
-
-[_SHORTCUTS] = LAYOUT(
-        XXXXXXX,                XXXXXXX,                C(S(KC_W)),             LSA(KC_E),              S(KC_F6),               LCA(KC_T),              LCA(KC_F9),             XXXXXXX,                LSA(KC_I),              XXXXXXX,
-        XXXXXXX,                C(S(KC_A)),             XXXXXXX,                XXXXXXX,                C(S(KC_F)),             C(KC_NUHS),             XXXXXXX,                XXXXXXX,                C(S(KC_J)),             XXXXXXX,
-        XXXXXXX,                C(S(KC_Z)),             XXXXXXX,                XXXXXXX,                C(S(KC_V)),             C(S(KC_B)),             C(S(KC_N)),             XXXXXXX,                C(G(KC_LEFT)),          C(G(KC_RGHT)),
-                                                                                XXXXXXX,                C(S(KC_ENT)),           XXXXXXX,                C(S(KC_SPC)),
-                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                C(S(KC_ENT)),           XXXXXXX,                XXXXXXX,                XXXXXXX
-),
-
-
-
 
 
 [_LEFT_RIGHT_NAVIGATION] = LAYOUT(
         XXXXXXX,                XXXXXXX,                XXXXXXX,                LCA(KC_DOWN),           LCA(KC_UP),             XXXXXXX,                KC_HOME,                KC_END,                 XXXXXXX,                XXXXXXX,
-        KC_LEFT,                KC_RGHT,                XXXXXXX,                MO(UP_DOWN_NAVIGATION), XXXXXXX,                XXXXXXX,                KC_LEFT,                KC_RGHT,                XXXXXXX,                XXXXXXX,
+        KC_LEFT,                KC_RGHT,                XXXXXXX,                XXXXXXX, XXXXXXX,                XXXXXXX,                KC_LEFT,                KC_RGHT,                XXXXXXX,                XXXXXXX,
         XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                C(KC_LBRC),             C(KC_RBRC),             XXXXXXX,                XXXXXXX,
-                                                                                MO(MOD_LEFT_RIGHT_NAVIGATION),KC_LALT,          XXXXXXX,                XXXXXXX,
-        XXXXXXX,                MO(MOD_LEFT_RIGHT_NAVIGATION),A(KC_ENT),      CTRL_ESCAPE,            _______,                _______,                _______,                XXXXXXX
+                                                                                XXXXXXX,KC_LALT,          XXXXXXX,                XXXXXXX,
+        XXXXXXX,                XXXXXXX,A(KC_ENT),      _______,            _______,                _______,                _______,                XXXXXXX
 ),
 
 
@@ -161,8 +155,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,                XXXXXXX,                XXXXXXX,                LCA(KC_DOWN),           LCA(KC_UP),             XXXXXXX,                KC_PGUP,                KC_PGDN,                C(KC_LBRC),             C(KC_RBRC),
         KC_UP,                  KC_DOWN,                XXXXXXX,                LCA(KC_LEFT),           LCA(KC_RGHT),           XXXXXXX,                KC_UP,                  KC_DOWN,                XXXXXXX,                XXXXXXX,
         XXXXXXX,                LCA(KC_F18),            LCA(KC_F19),            LCA(KC_F20),            LCA(KC_F21),            LCA(KC_F22),            XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-                                                                                MO(MOD_LEFT_RIGHT_NAVIGATION),KC_LALT,          XXXXXXX,                XXXXXXX,
-                                XXXXXXX,                KC_LGUI,                ENTER_SHIFT,            CTRL_ESCAPE,            _______,                _______,                _______,                XXXXXXX
+                                                                                XXXXXXX,KC_LALT,          XXXXXXX,                XXXXXXX,
+                                XXXXXXX,                KC_LGUI,                _______,            _______,            _______,                _______,                _______,                XXXXXXX
 ),
 
 
@@ -219,27 +213,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-[_WINDOWS_NAVIGATION] = LAYOUT(
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-        XXXXXXX,                LCAG(KC_1),             LCAG(KC_2),             LCAG(KC_3),             LCAG(KC_4),             LCAG(KC_5),             XXXXXXX,                LCAG(KC_6),             LCAG(KC_7),             LCAG(KC_8),
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                _______,                XXXXXXX,                LCAG(KC_9),             LCAG(KC_0),
-                                                                                _______,                _______,                _______,                _______,
-                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                _______,                _______,                _______,                XXXXXXX
-),
 
-
-
-
-
-[_TABS] = LAYOUT(
-        A(KC_F18),              A(KC_F19),              A(KC_F20),              A(KC_F21),              A(KC_F22),              XXXXXXX,                XXXXXXX,                G(KC_TAB),              SALT_TAB,               ALT_TAB,
-        KC_ENT,                 XXXXXXX,                TAB_LEFT,               TAB_RIGHT,              XXXXXXX,                XXXXXXX,                TAB_LEFT,               TAB_RIGHT,              XXXXXXX,                KC_ENT,
-        KC_ESC,                 A(KC_F17),              A(KC_F14),              A(KC_F13),              A(KC_F16),              XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                KC_ESC,
-                                                                                _______,                LLOCK,
-        XXXXXXX,                XXXXXXX,
-                                MO(MOD),                _______,                _______,                _______,                _______,                _______,                _______,                _______
-),
-
+//
+//[_ALT_TABS] = LAYOUT(
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,           ALT_TAB_LEFT,                ALT_TAB_RIGHT,          XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
+//),
+//
+//
+//
+//[_CTRL_TABS] = LAYOUT(
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                CTRL_TAB_LEFT,   CTRL_TAB_RIGHT,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
+//),
+//
+//
+//
+//[_WIN_TABS] = LAYOUT(
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,            DESKTOP_LEFT,         DESKTOP_RIGHT,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
+//),
+//
+//
 
 
 
@@ -362,7 +366,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MUTE,                XXXXXXX,                KC_VOLD,                KC_VOLU,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
         KC_MPLY,                XXXXXXX,                KC_MPRV,                KC_MNXT,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
         KC_MPLY,                XXXXXXX,                KC_MRWD,                KC_MFFD,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+                                                                                    XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
                                 XXXXXXX,                XXXXXXX,                MO(KEYBOARD),           XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
 ),
 
@@ -383,15 +387,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
-
-[_EMPTY] = LAYOUT(
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
-                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
-),
-
+//
+//[_EMPTY] = LAYOUT(
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+//                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
+//),
+//
 
 
 

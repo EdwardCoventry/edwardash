@@ -87,4 +87,4 @@ static uint8_t get_active_layer(active_key_stack_t *stack) {
     }
 
     return active_layer; // Return the last layer we land on
-}
+                }

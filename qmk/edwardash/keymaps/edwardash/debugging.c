@@ -1,5 +1,6 @@
 // use qmk toolbox tools - HID console
 
+#pragma once
 
 #include "print.h"
 

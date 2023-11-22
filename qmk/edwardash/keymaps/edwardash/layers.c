@@ -5,11 +5,10 @@
 enum layer_names {
     _ABC,
     _SYMBOLS,
-    _SYMBOLS_2,
-    _SHORTCUTS,
-    _TABS,
-    _DELETE,
     _LEFT_RIGHT_NAVIGATION,
+    _TABS,
+    _SYMBOLS_2,
+    _DELETE,
     _UP_DOWN_NAVIGATION,
     _BOOKMARKS,
     _NUMS,
@@ -20,30 +19,21 @@ enum layer_names {
     _COPILOT,
     _MEDIA,
 
-    _QWERTY,
-
     _MOD_LEFT_RIGHT_NAVIGATION,
     _MOD_UP_DOWN_NAVIGATION,
-    _MOD,
-    _WINDOWS_NAVIGATION,
     _DEBUGGING_LAYER_SELECT,
-    _WINDOWS,
     _FN_NUMS,
     _RUNNING,
     _RUN_TO_CURSOR,
     _TOOLS,
-
-
-    _EMPTY,
-    _LAYER_A,
     _KEYBOARD,
-
-    ENUM_LAYERS_END,
+    _EMPTY,
+    __ENUM_LAYERS_END,
 
 };
 
 enum hold_mods {
-    SHIFT = ENUM_LAYERS_END,
+    SHIFT = __ENUM_LAYERS_END,
     CTRL,
     ALT,
     WIN,
@@ -53,11 +43,11 @@ enum layer_keycodes {
 
     ABC = SAFE_RANGE,
     SYMBOLS,
+    LEFT_RIGHT_NAVIGATION,
+    TABS,
     SYMBOLS_2,
     SHORTCUTS,
-    TABS,
     DELETE,
-    LEFT_RIGHT_NAVIGATION,
     UP_DOWN_NAVIGATION,
     BOOKMARKS,
     NUMS,
@@ -72,45 +62,29 @@ enum layer_keycodes {
 
     MOD_LEFT_RIGHT_NAVIGATION,
     MOD_UP_DOWN_NAVIGATION,
-    MOD,
-    WINDOWS_NAVIGATION,
     DEBUGGING_LAYER_SELECT,
-    WINDOWS,
     FN_NUMS,
+    RUNNING,
     RUN_TO_CURSOR,
     TOOLS,
-    RUNNING,
-
-    EMPTY,
-    LAYER_A,
     KEYBOARD,
-
-    ENUM_LAYER_KEYCODES_END,
+    EMPTY,
+    __ENUM_LAYER_KEYCODES_END,
 
 };
 
 enum custom_keycodes {
 
-
-    TAB_LEFT = ENUM_LAYER_KEYCODES_END,
+    TAB_LEFT = __ENUM_LAYER_KEYCODES_END,
     TAB_RIGHT,
-    SHIFT_TAB_MOD,
-    ALT_TAB,
-    SALT_TAB,
-    CTL_TAB,
-    SCTL_TAB,
+    ALT_TAB_RIGHT,
+    ALT_TAB_LEFT,
+    CTRL_TAB_RIGHT,
+    CTRL_TAB_LEFT,
     DESKTOP_LEFT,
     DESKTOP_RIGHT,
+
     LLOCK,
-
-
-    TAB_SHIFT,
-    ENTER_SHIFT,
-    SHORTCUTS_WIN,
-    CTRL_ESCAPE,
-    ALT_WIN,
-    CAPS_ALT,
-    WIN_SPACE,
 
 
 };// 

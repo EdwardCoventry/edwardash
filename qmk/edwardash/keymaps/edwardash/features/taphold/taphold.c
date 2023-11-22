@@ -6,6 +6,7 @@
 #include "features/taphold/getholdlayer.c"
 #include "features/taphold/holdactions.c"
 #include "features/taphold/modkeys.c"
+#include "features/supertabs/supertabs.c"
 
 
 bool handle_tap_hold_press(uint16_t keycode, keyrecord_t *record) {
@@ -15,19 +16,19 @@ bool handle_tap_hold_press(uint16_t keycode, keyrecord_t *record) {
     keypos_t key_position = {.row = record->event.key.row, .col = record->event.key.col};
     tap_hold_action_t *current_action = get_tap_hold_action(key_position);
 
-
-    int hold_layer = get_hold_layer_of_keypress(key_position);
-
     // On key press
     if (record->event.pressed) {
-        register_hold_mod_key(hold_layer);
-        add_key_to_active_stack(&active_keys_stack, key_position);
+//        if (!handle_super_tabs(keycode, record)) return;
         add_tap_hold_action(current_action, key_position);
-        //  register modifiers on press
+        add_key_to_active_stack(&active_keys_stack, key_position);
+        //  register any modifiers on press
+        register_hold_mod_key(current_action->hold_layer);
         return false; // Do not process the key press now
     } else {
-        //
-        unregister_hold_mod_key(hold_layer);
+        if (current_action->hold_layer) {
+            unregister_hold_mod_key(current_action->hold_layer);
+            release_super_tabs(false);
+        }
         remove_key_from_active_stack(&active_keys_stack, key_position);
         subtract_unpressed_keys(&current_action->active_stack, &active_keys_stack);
         mark_held_keys(&current_action->active_stack);

@@ -42,3 +42,22 @@ void unregister_hold_mod_key(uint16_t hold_key) {
     }
 }
 
+
+////  register modifier keycodes
+//void register_keycode_layer_key(uint16_t hold_key) {
+//    switch (hold_key) {
+//        case CTRL:
+//            register_code(KC_LCTL);
+//            break;
+//        case SHIFT:
+//            register_code(KC_LSFT);
+//            break;
+//        case ALT:
+//            register_code(KC_LALT);
+//            break;
+//        case WIN:
+//            register_code(KC_LGUI);
+//            break;
+//    }
+//}
+

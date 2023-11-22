@@ -25,8 +25,7 @@ static void send_keycode(uint16_t keycode, bool clear_shift) {
 
 
 // Function to handle special shift key combinations
-bool handle_shift_keycombos(uint16_t keycode, keyrecord_t *record) {
-  if (record->event.pressed) {
+bool handle_shift_symbols(uint16_t keycode, keyrecord_t *record) {
 
     // this function is for handling shifts, so otherwise return
     if (!(get_mods() & (MOD_BIT(KC_LSFT) | MOD_BIT(KC_RSFT)))) {
@@ -45,8 +44,10 @@ bool handle_shift_keycombos(uint16_t keycode, keyrecord_t *record) {
       return false; // Skip all further processing of this key
     // ... handle other keycodes if needed
     default:
-      break;
+        return true;
     }
-  }
-  return true; // Return true if no special handling was needed
+
+
+
+    return true; // Return true if no special handling was needed
 }
