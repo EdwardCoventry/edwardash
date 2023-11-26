@@ -7,30 +7,51 @@
 #include "keycodes/otherkeycodes.h"
 
 
-#define NO_LAYER 0 // or whatever value you assign for no action
-#define ____ 0 // or whatever value you assign for no action
+#define NO_LAYER 0
+#define ____ 0
+
+
+//  define a default hold layout
+//  this will be used if no hold key is defined on a layer
+const int PROGMEM hold_layer_default[MATRIX_ROWS][MATRIX_COLS] =
+    LAYOUT(
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+        ____, ALT, ____, ____,
+        ____, WIN, SHIFT, CTRL, ____, ____, ____, ____);
 
 
 
 // List of layers that are actually defined in hold_layers
-const uint8_t defined_hold_layers[] = {_ABC, _SYMBOLS, _LEFT_RIGHT_NAVIGATION, _TABS};
+const uint8_t defined_hold_layers[] = {_ABC, _SYMBOLS, _SYMBOLS_2, _LEFT_RIGHT_NAVIGATION, _TABS, _NUMS};
 
 const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ABC] = LAYOUT(        // Assuming ____ is defined as -1 or any other int value representing no action
         ____, _BREAKPOINTS, _STEPPING, _DEBUGGING, ____, ____, ____, ____, ____, ____,
         _DELETE, _TABS, _LEFT_RIGHT_NAVIGATION, _SYMBOLS, ____, ____, _TOOLS, _COPILOT, ____, _DEBUGGING_LAYER_SELECT,
         _NUMS, _MEDIA, _COPILOT, _SYMBOLS_2, ____, ____, _BOOKMARKS, ____, _MEDIA, ____,
-        ____, ALT, ____, ____,
-        ____, WIN, SHIFT, CTRL, ____, ____, ____, ____),
+        ____, ____, ____, ____,
+        ____, ____, ____, ____, ____, ____, ____, ____),
     // Define other layers as needed
 
     [_SYMBOLS] = LAYOUT(
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
-        ____,                ____,                _LEFT_RIGHT_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                _UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                _SYMBOLS_3,                ____,                ____,                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                ____,                ____,
+                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+),
+
+
+    [_SYMBOLS_2] = LAYOUT(
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                _SYMBOLS_3,                ____,                ____,                ____,                ____,                ____,                ____,
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
                                                                                 ____,                ____,                ____,                ____,
                                 ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
 ),
+
 
 
 [_LEFT_RIGHT_NAVIGATION] = LAYOUT(
@@ -38,7 +59,7 @@ const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,                ____,                ____,                _UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____,                ____,
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
                                                                                 ____,                ____,                ____,                ____,
-                                ____,                ____,                _MOD_UP_DOWN_NAVIGATION,                ____,                ____,                ____,                ____,                ____
+                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
 ),
 
 
@@ -48,7 +69,15 @@ const int PROGMEM hold_layers[][MATRIX_ROWS][MATRIX_COLS] = {
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
         ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
                                                                                 ____,                ____,                ____,                ____,
-                                                                                ____,                WIN,                SHIFT,                CTRL,                ____,                ____,                ____,                ____
+                                                                                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____
+),
+
+        [_NUMS] = LAYOUT(
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+        ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                ____,                ____,
+                                                                                ____,                ____,                _FN_NUMS,                ____,                ____,                ____,                ____,                ____
 ),
 
 
@@ -82,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYMBOLS] = LAYOUT(
         KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_PPLS,                KC_PAST,                KC_EQL,                 KC_MINS,                KC_PSLS,
-        S(KC_1),                KC_NUHS,       KC_EQL,      XXXXXXX,  KC_NUHS,           KC_F23,                 KC_LEFT_PAREN,                KC_LBRC,                S(KC_LBRC),             KC_LEFT_CURLY_BRACE,
+        S(KC_1),                KC_NUHS,       KC_EQL,      XXXXXXX,  KC_NUHS,           KC_F23,                 KC_LEFT_PAREN,                KC_LEFT_BRACKET,                KC_LEFT_CURLY_BRACE,             KC_LEFT_ANGLE_BRACKET,
         LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),          KC_F24,                 KC_COLON,                KC_SEMICOLON,                XXXXXXX,             KC_QUOTE,
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
                                 XXXXXXX,                KC_TRNS,                 S(KC_ENT),                 XXXXXXX,  KC_TRNS,                KC_UNDERSCORE,KC_F22,     XXXXXXX
@@ -94,11 +123,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_SYMBOLS_2] = LAYOUT(
         KC_QUES,                S(KC_QUOT),             KC_NO,                  S(KC_2),                KC_NUBS,                KC_AMPR,                KC_CIRC,                KC_PIPE,                 KC_TILDE,                KC_NUBS,
-        S(KC_1),                LT(TABS,KC_NUHS),       KC_EQL,KC_EQL,KC_NUHS,           KC_F23,                 KC_RIGHT_PAREN,                KC_RBRC,                S(KC_RBRC),             KC_RIGHT_CURLY_BRACE,
+        S(KC_1),                LT(TABS,KC_NUHS),       KC_EQL,KC_EQL,KC_NUHS,           KC_F23,                 KC_RIGHT_PAREN,                KC_RIGHT_BRACKET,                KC_RIGHT_CURLY_BRACE,             KC_RIGHT_ANGLE_BRACKET,
         LT(FN_NUMS,S(KC_6)),    S(KC_4),                S(KC_5),                KC_GRV,                 S(KC_BSLS),             KC_F24,                 KC_EXCLAIM,                KC_QUESTION,               XXXXXXX,             KC_DOUBLE_QUOTE,
                                                                                 KC_TRNS,                KC_LGUI,                KC_TRNS,                KC_TRNS,
                                 XXXXXXX,                KC_TRNS,                KC_F22,                 KC_F22,  KC_TRNS,                XXXXXXX,KC_F22,     XXXXXXX
         ),
+
+        //
+
+[_SYMBOLS_3] = LAYOUT(
+        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                OPEN_CLOSE_PAREN_ROUND,                OPEN_CLOSE_PAREN_SQUARE,                OPEN_CLOSE_PAREN_CURLY,                OPEN_CLOSE_PAREN_ANGLE,                OPEN_CLOSE_PAREN_ANGLE,
+        XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+                                                                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
+                                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX
+),
+
+
+
 
 
 
@@ -194,7 +236,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,                KC_1,                   KC_2,                   KC_3,                   KC_DOT,
         XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,                XXXXXXX,
                                                                                 _______,                _______,                LLOCK,                  XXXXXXX,
-                                MO(FN_NUMS),            _______,                MO(FN_NUMS),            _______,                XXXXXXX,                KC_ENT,                 XXXXXXX,                XXXXXXX
+                                _______,            _______,                _______,            _______,                XXXXXXX,                KC_ENT,                 XXXXXXX,                XXXXXXX
 ),
 
 

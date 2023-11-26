@@ -27,3 +27,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 //  state = release_super_tabs_on_layer_change(state);
   return state;
 }
+
+void matrix_scan_user(void) {
+    handle_matrix_scan();
+}

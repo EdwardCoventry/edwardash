@@ -1,18 +1,13 @@
 #pragma once
-#define MAX_ACTIVE_KEYS 8 // Maximum number of active keys expected to be held simultaneously
-#include "features/taphold/isholdlayer.c"
+#include "features/taphold/getholdlayer.c"
 #include "features/taphold/modkeys.c"
 
-typedef struct {
-    keypos_t keys[MAX_ACTIVE_KEYS];
-    uint8_t count;
-} active_key_stack_t;
 
 //Global active keys stack and its count
-static active_key_stack_t active_keys_stack;
+active_key_stack_t active_keys_stack;
 
 // Function to add a key to the active keys stack
-static bool add_key_to_active_stack(active_key_stack_t *stack, keypos_t keypos) {
+bool add_key_to_active_stack(active_key_stack_t *stack, keypos_t keypos) {
     if (stack->count < MAX_ACTIVE_KEYS) {
         stack->keys[stack->count] = keypos;
         stack->count++;
@@ -21,7 +16,7 @@ static bool add_key_to_active_stack(active_key_stack_t *stack, keypos_t keypos) 
     return false; // Stack is full, key not added
 }
 // Function to remove a key from the active keys stack
-static bool remove_key_from_active_stack(active_key_stack_t *stack, keypos_t keypos) {
+bool remove_key_from_active_stack(active_key_stack_t *stack, keypos_t keypos) {
     for (uint8_t i = 0; i < stack->count; i++) {
         if (stack->keys[i].row == keypos.row && stack->keys[i].col == keypos.col) {
             // Shift the rest of the stack down by one
@@ -36,7 +31,7 @@ static bool remove_key_from_active_stack(active_key_stack_t *stack, keypos_t key
 }
 
 // Function to check if a key is in the active keys stack
-static bool is_key_in_active_stack(const active_key_stack_t *stack, keypos_t keypos) {
+bool is_key_in_active_stack(const active_key_stack_t *stack, keypos_t keypos) {
     for (uint8_t i = 0; i < stack->count; i++) {
         if (stack->keys[i].row == keypos.row && stack->keys[i].col == keypos.col) {
             return true;
@@ -47,7 +42,7 @@ static bool is_key_in_active_stack(const active_key_stack_t *stack, keypos_t key
 
 // Function to return a new active stack of the intersection between two stacks, preserving the order of the first
 // Function to modify the first stack to be the intersection of the two stacks, preserving the order of the first
-static void subtract_unpressed_keys(active_key_stack_t *stack1, const active_key_stack_t *stack2) {
+void subtract_unpressed_keys(active_key_stack_t *stack1, const active_key_stack_t *stack2) {
     uint8_t intersection_count = 0;
 
     for (uint8_t i = 0; i < stack1->count; i++) {
@@ -64,11 +59,9 @@ static void subtract_unpressed_keys(active_key_stack_t *stack1, const active_key
 
 // Assuming hold_layers is globally available
 //extern const int hold_layers[][MATRIX_ROWS][MATRIX_COLS];
-static uint8_t get_active_layer(active_key_stack_t *stack) {
+uint8_t get_active_layer(active_key_stack_t *stack) {
 
     uint8_t active_layer = 0; // Start with the base layer
-
-    uprintf("stack->count: %u\n", stack->count);
 
     for (uint8_t i = 0; i < stack->count; i++) {
         uint8_t row = stack->keys[i].row;
